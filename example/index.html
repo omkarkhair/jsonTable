@@ -11,27 +11,12 @@
 		
 	</thead>
 	<tbody>
-		<tr>
-			<td>1</td>
-			<td>Bob</td>
-			<td>78</td>
-		</tr>
-		<tr>
-			<td>2</td>
-			<td>Bob</td>
-			<td>78</td>
-		</tr>
-		<tr>
-			<td>3</td>
-			<td>Bob</td>
-			<td>78</td>
-		</tr>
 	</tbody>
 </table>
 <script type="text/javascript">
 	$("#dataTable").jsonTable({
-		head : ['#','Name','Score'],
-		json : ['id', 'name', 'score']
+		head : ['#','Operating System','Market Share'],
+		json : ['id', 'name', 'share']
 	});
 
 	$("#dataTable").jsonTableUpdate("data.json");

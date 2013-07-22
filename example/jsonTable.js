@@ -19,18 +19,29 @@
         var sel = this.selector;
         $(this.selector + ' tbody > tr').remove();
 
-        $.get(url, function(data) {
-            console.log(data);
-            var row = "";
-            for(var i = 0; i < data.length; i++){
-                row += "<tr>";
-                for (var j = 0; j < settings.json.length; j++) {
-                    row += "<td>" + data[i][settings.json[j]] + "</td>";
-                }
-                row += "</tr>";
+        if(typeof url == "string")
+        {
+            $.get(url, function(data) {
+                $.fn.updateFromObj(data,settings,sel);
+            });
+        }
+        else if(typeof url == "object")
+        {
+            $.fn.updateFromObj(url,settings,sel);
+        }
+    }
+
+    $.fn.updateFromObj = function(obj,settings,selector){
+        var row = "";
+        
+        for(var i = 0; i < obj.length; i++){
+            row += "<tr>";
+            for (var j = 0; j < settings.json.length; j++) {
+                row += "<td>" + obj[i][settings.json[j]] + "</td>";        
             }
-            $(sel + '> tbody:last').append(row);
-        });
+            row += "</tr>";
+        }
+        $(selector + '> tbody:last').append(row);
     }
  
 }( jQuery ));

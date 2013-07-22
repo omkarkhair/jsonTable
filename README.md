@@ -35,7 +35,21 @@ The JSON data in this case looks something like this.
 ]
 ```
 
-Update the table with a JSON file. This could be the url to your JSON endpoint. Currently only GET requests are supported.
+Update the table from a JSON file. This could be the url to your JSON endpoint. Currently only GET requests are supported.
 ```javascript
 $("#dataTable").jsonTableUpdate("data.json");
+```
+
+####OR
+
+Update data from a JSON object.
+```javascript
+$("#dataTable").jsonTableUpdate([
+{"id" : 1, "name" : "iOS", "share" : 57.56},
+{"id" : 2, "name" : "Android", "share" : 24.66},
+{"id" : 3, "name" : "Java ME", "share" : 10.72},
+{"id" : 4, "name" : "Symbian", "share" : 2.49},
+{"id" : 4, "name" : "Blackberry", "share" : 2.26},
+{"id" : 4, "name" : "Windows Phone", "share" : 1.33}
+]);
 ```
