@@ -11,7 +11,8 @@
     ],
     "version": "0.0.1",
     "author": {
-        "name": "Omkar Khair"
+        "name": "Omkar Khair",
+        "url" : "http://omkarslab.com"
     },
     "maintainers": [],
     "licenses": [
