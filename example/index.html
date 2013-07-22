@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>jQuery : jsonTable</title>
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript" src="jsonTable.js"></script>
+</head>
+<body>
+<table id="dataTable">
+	<thead>
+		
+	</thead>
+	<tbody>
+		<tr>
+			<td>1</td>
+			<td>Bob</td>
+			<td>78</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>Bob</td>
+			<td>78</td>
+		</tr>
+		<tr>
+			<td>3</td>
+			<td>Bob</td>
+			<td>78</td>
+		</tr>
+	</tbody>
+</table>
+<script type="text/javascript">
+	$("#dataTable").jsonTable({
+		head : ['#','Name','Score'],
+		json : ['id', 'name', 'score']
+	});
+
+	$("#dataTable").jsonTableUpdate("data.json");
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+{
+    "name": "jsonTable",
+    "title": "jsonTable",
+    "description": "jQuery plugin for dispaying JSON responses on a Table.",
+    "keywords": [
+        "json",
+        "table",
+        "api",
+        "ajax",
+        "get"
+    ],
+    "version": "0.0.1",
+    "author": {
+        "name": "Omkar Khair"
+    },
+    "maintainers": [],
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "https://github.com/omkarkhair/jsonTable/LICENSE"
+        }
+    ],
+    "bugs": "https://github.com/omkarkhair/jsonTable/issues",
+    "homepage": "https://github.com/omkarkhair/jsonTable",
+    "docs": "https://github.com/omkarkhair/jsonTable",
+    "dependencies": {
+        "jquery": ">=1.5"
+    }
+}
