@@ -41,7 +41,8 @@
             }
             row += "</tr>";
         }
-        $(selector + '> tbody:last').append(row);
+        $(selector + '> tbody:last').append(row);        
+        $(window).trigger('resize'); // trigger the resize event to reposition dialog once all the data is loaded
     }
  
 }( jQuery ));
