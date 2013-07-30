@@ -14,7 +14,10 @@
         "name": "Omkar Khair",
         "url" : "http://omkarslab.com"
     },
-    "maintainers": [],
+    "maintainers": [{
+        "name" : "Damien BUTY",
+        "url" : "https://github.com/Dam-Buty"
+    }],
     "licenses": [
         {
             "type": "MIT",
