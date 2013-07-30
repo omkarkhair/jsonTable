@@ -19,7 +19,6 @@
             rowClass: undefined,
             callback: undefined
         }, options );
-        console.log(opt);
         var settings = this.data("settings");
         var sel = this.selector;
         $(this.selector + ' tbody > tr').remove();
