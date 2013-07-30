@@ -13,21 +13,26 @@
         return this;
     };
 
-    $.fn.jsonTableUpdate = function( url , trclass, callback){
-
+    $.fn.jsonTableUpdate = function( options ){
+        var opt = $.extend({
+            source: undefined,
+            rowClass: undefined,
+            callback: undefined
+        }, options );
+        console.log(opt);
         var settings = this.data("settings");
         var sel = this.selector;
         $(this.selector + ' tbody > tr').remove();
 
-        if(typeof url == "string")
+        if(typeof opt.source == "string")
         {
-            $.get(url, function(data) {
-                $.fn.updateFromObj(data,settings,sel, trclass, callback);
+            $.get(opt.source, function(data) {
+                $.fn.updateFromObj(data,settings,sel, opt.rowClass, opt.callback);
             });
         }
-        else if(typeof url == "object")
+        else if(typeof opt.source == "object")
         {
-            $.fn.updateFromObj(url,settings,sel, trclass, callback);
+            $.fn.updateFromObj(opt.source,settings,sel, opt.rowClass, opt.callback);
         }
     }
 

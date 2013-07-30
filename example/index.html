@@ -4,11 +4,17 @@
 	<title>jQuery : jsonTable</title>
 	<script type="text/javascript" src="jquery.min.js"></script>
 	<script type="text/javascript" src="jsonTable.js"></script>
+	<style type="text/css">
+	.rowClass td
+	{
+		border: 1px solid #c1c1c1;
+	}
+	</style>
 </head>
 <body>
+<div id="mssg"></div>
 <table id="dataTable">
 	<thead>
-		
 	</thead>
 	<tbody>
 	</tbody>
@@ -19,7 +25,13 @@
 		json : ['id', 'name', 'share']
 	});
 
-	$("#dataTable").jsonTableUpdate("data.json");
+	$("#dataTable").jsonTableUpdate({
+		source : "data.json",
+		rowClass : "rowClass",
+		callback : function(){
+			$("#mssg").html("Table updated at " + new Date());
+		}
+	});
 </script>
 </body>
 </html>

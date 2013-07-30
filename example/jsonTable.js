@@ -8,40 +8,56 @@
         this.data("settings",settings);
         var thead = $(this.selector + ' thead').append("<tr></tr>\n");
         for(var i = 0; i < settings.head.length; i++){
-             thead.append("<th>"+settings.head[i]+"</th>\n")
+             $(this.selector + ' tr').append("<th>"+settings.head[i]+"</th>\n")
         }
         return this;
     };
 
-    $.fn.jsonTableUpdate = function( url ){
-
+    $.fn.jsonTableUpdate = function( options ){
+        var opt = $.extend({
+            source: undefined,
+            rowClass: undefined,
+            callback: undefined
+        }, options );
+        console.log(opt);
         var settings = this.data("settings");
         var sel = this.selector;
         $(this.selector + ' tbody > tr').remove();
 
-        if(typeof url == "string")
+        if(typeof opt.source == "string")
         {
-            $.get(url, function(data) {
-                $.fn.updateFromObj(data,settings,sel);
+            $.get(opt.source, function(data) {
+                $.fn.updateFromObj(data,settings,sel, opt.rowClass, opt.callback);
             });
         }
-        else if(typeof url == "object")
+        else if(typeof opt.source == "object")
         {
-            $.fn.updateFromObj(url,settings,sel);
+            $.fn.updateFromObj(opt.source,settings,sel, opt.rowClass, opt.callback);
         }
     }
 
-    $.fn.updateFromObj = function(obj,settings,selector){
+    $.fn.updateFromObj = function(obj,settings,selector, trclass, callback){
         var row = "";
         
         for(var i = 0; i < obj.length; i++){
-            row += "<tr>";
+            if (!trclass) {
+                row += "<tr>";
+            } else {
+                row += "<tr class='" + trclass + "'>";
+            }
+            
             for (var j = 0; j < settings.json.length; j++) {
                 row += "<td>" + obj[i][settings.json[j]] + "</td>";        
             }
             row += "</tr>";
         }
         $(selector + '> tbody:last').append(row);
+        
+        if (typeof callback == "function") {
+            callback();
+        }
+        
+        $(window).trigger('resize'); // trigger the resize event to reposition dialog once all the data is loaded
     }
  
 }( jQuery ));
