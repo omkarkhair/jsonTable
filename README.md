@@ -43,8 +43,10 @@ The JSON data in this case looks something like this.
 ```javascript
 var options = {
 	source : "data.json", // Can be a URL or a JSON object array
-	rowClass : "rowClass", //optional class to be applied
-	callback : function() { //Do something when table is updated }
+	rowClass : "rowClass", //(optional) Class to be applied
+	callback : function() {
+		// (optional) Do something when table is updated
+	}
 }
 
 $("#dataTable").jsonTableUpdate(options);
