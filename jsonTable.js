@@ -3,7 +3,8 @@
     $.fn.jsonTable = function( options ) {
         var settings = $.extend({
             head: [],
-            json:[]
+            json:[],
+            id: ""
         }, options );
         this.data("settings",settings);
         var thead = $(this.selector + ' thead').append("<tr></tr>\n");
@@ -35,24 +36,23 @@
         }
     }
 
-    $.fn.updateFromObj = function(obj,settings,selector, trclass, callback){
-        var row = "";
-        
-        for(var i = 0; i < obj.length; i++){
-            if (!trclass) {
-                row += "<tr>";
-            } else {
-                row += "<tr class='" + trclass + "'>";
-            }
+    $.fn.updateFromObj = function(obj,settings,selector, rowClass, callback){
+        $.each(obj, function() {
+            var dataRow = this;
+            var tableRow = $("<tr></tr>").addClass(rowClass).attr({ "data-value": dataRow[settings.id] });
             
-            for (var j = 0; j < settings.json.length; j++) {
-                row += "<td>" + obj[i][settings.json[j]] + "</td>";        
-            }
-            row += "</tr>";
-        }
-        $(selector + '> tbody:last').append(row);
+            $.each(settings.json, function() {
+                if (typeof dataRow[this] === 'string') {
+                    tableRow.append($("<td>" + dataRow[this] + "</td>"));
+                } else {
+                    tableRow.append($("<td>" + dataRow[this].display + "</td>").attr({ "data-value": dataRow[this].value }));
+                }
+            });
+            $(selector + '> tbody:last').append(tableRow);
+        });
         
-        if (typeof callback == "function") {
+        
+        if (typeof callback === "function") {
             callback();
         }
         
