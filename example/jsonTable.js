@@ -37,13 +37,17 @@
     }
 
     $.fn.updateFromObj = function(obj,settings,selector, rowClass, callback){
-        $.each(obj, function() {
+        $.each(obj, function(arrIndex,obj) {
             var dataRow = this;
             var tableRow = $("<tr></tr>").addClass(rowClass).attr({ "data-value": dataRow[settings.id] });
             
             $.each(settings.json, function() {
-                console.log(dataRow[this]);
-                tableRow.append($("<td>" + dataRow[this] + "</td>"));
+                if(this == '*') {
+                    tableRow.append($("<td>"+(arrIndex+1)+"</td>"));
+                }
+                else {
+                    tableRow.append($("<td>" + dataRow[this] + "</td>"));
+                }
             });
             $(selector + '> tbody:last').append(tableRow);
         });
