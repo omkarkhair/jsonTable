@@ -4,44 +4,65 @@
         var settings = $.extend({
             head: [],
             json:[]
-        }, options );
-        this.data("settings",settings);
-        var thead = $(this.selector + ' thead').append("<tr></tr>\n");
-        for(var i = 0; i < settings.head.length; i++){
-             thead.append("<th>"+settings.head[i]+"</th>\n")
-        }
-        return this;
+        }, options, { table: this } );
+        
+        table = this;
+        
+        table.data("settings",settings);
+        
+        table.empty();
+        table.append($("<thead></thead>").append("<tr></tr>"))
+            .append($("<tbody></tbody>"));
+        
+        $.each(settings.head, function(i, header) {
+            table.find("thead").find("tr").append("<th>"+header+"</th>");
+        });
+        
+        return table;
     };
 
-    $.fn.jsonTableUpdate = function( url ){
-
+    $.fn.jsonTableUpdate = function( options ){
+        var opt = $.extend({
+            source: undefined,
+            rowClass: undefined,
+            callback: undefined
+        }, options );
         var settings = this.data("settings");
-        var sel = this.selector;
-        $(this.selector + ' tbody > tr').remove();
 
-        if(typeof url == "string")
+        if(typeof opt.source == "string")
         {
-            $.get(url, function(data) {
-                $.fn.updateFromObj(data,settings,sel);
+            $.get(opt.source, function(data) {
+                $.fn.updateFromObj(data,settings,opt.rowClass, opt.callback);
             });
         }
-        else if(typeof url == "object")
+        else if(typeof opt.source == "object")
         {
-            $.fn.updateFromObj(url,settings,sel);
+            $.fn.updateFromObj(opt.source,settings, opt.rowClass, opt.callback);
         }
     }
 
-    $.fn.updateFromObj = function(obj,settings,selector){
-        var row = "";
+    $.fn.updateFromObj = function(obj,settings,rowClass, callback){
+        settings.table.find("tbody").empty();
+        $.each(obj, function(i,line) {
+            var tableRow = $("<tr></tr>").addClass(rowClass);
+            
+            $.each(settings.json, function(j, identity) {
+                if(identity == '*') {
+                    tableRow.append($("<td>"+(i+1)+"</td>"));
+                }
+                else {
+                    tableRow.append($("<td>" + line[this] + "</td>"));
+                }
+            });
+            settings.table.append(tableRow);
+        });
         
-        for(var i = 0; i < obj.length; i++){
-            row += "<tr>";
-            for (var j = 0; j < settings.json.length; j++) {
-                row += "<td>" + obj[i][settings.json[j]] + "</td>";        
-            }
-            row += "</tr>";
+        
+        if (typeof callback === "function") {
+            callback();
         }
-        $(selector + '> tbody:last').append(row);
+        
+        $(window).trigger('resize');
     }
  
 }( jQuery ));
