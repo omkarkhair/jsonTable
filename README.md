@@ -5,22 +5,14 @@ A simple jQuery plugin to get your JSON data on a table.
 
 Gettings started
 ----------------
-It is necessary to have a basic table structure with `<thead>` and `<tbody>` in place.
-```html
-<table id="dataTable">
-	<thead>
-	</thead>
-	<tbody>
-	</tbody>
-</table>
-```
+You can use any table, whether from the DOM or jQuery created. Any preexisting <thead> and <tbody> will be removed.
 
 Initialize the table with the head data, and json identities to look for in the loaded file.
 ```javascript
 $("#dataTable").jsonTable({
 	head : ['#','Operating System','Market Share'], // Goes on the <thead>
 	json : ['id', 'name', 'share'] //json identities from the loaded json object
-});
+});				       // NOTE : an '*' identity will generate an autoincremented column
 ```
 
 The JSON data in this case looks something like this.
