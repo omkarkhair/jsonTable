@@ -6,13 +6,9 @@
 	<script type="text/javascript" src="jsonTable.js"></script>
 </head>
 <body>
-<table id="dataTable">
-	<thead>
-		
-	</thead>
-	<tbody>
-	</tbody>
-</table>
+<table id="dataTable" style="color: red;">
+</table><br/>
+<div id="test"></div>
 <script type="text/javascript">
 	$("#dataTable").jsonTable({
 		head : ['#','Operating System','Market Share'],
@@ -20,6 +16,18 @@
 	});
 
 	$("#dataTable").jsonTableUpdate("data.json");
+	
+	// Test on a jquery created table
+	var testTable = $("<table></table>");
+	
+	testTable.jsonTable({
+	    head : ['#','Operating System','Market Share', "test"], // Goes on the <thead>
+	    json : ['id', 'name', 'share', '*'] //json identities from the loaded json object
+	});
+	
+	testTable.jsonTableUpdate(options);
+	
+	$("#testdiv").append(testTable);
 </script>
 </body>
 </html>
