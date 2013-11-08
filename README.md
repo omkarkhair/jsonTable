@@ -5,7 +5,7 @@ A simple jQuery plugin to get your JSON data on a table.
 
 Gettings started
 ----------------
-You can use any table, whether from the DOM or jQuery created. Any preexisting <thead> and <tbody> will be removed.
+You can use any table, whether from the DOM or jQuery created. Any preexisting thead and tbody will be removed.
 
 Initialize the table with the head data, and json identities to look for in the loaded file.
 ```javascript
