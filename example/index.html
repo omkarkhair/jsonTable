@@ -20,13 +20,22 @@
 	</tbody>
 </table>
 <script type="text/javascript">
+    var json_source = [
+        {"id" : 1, "name" : "iOS", "share" : 57.56},
+        {"id" : 2, "name" : "Android", "share" : 24.66},
+        {"id" : 3, "name" : "Java ME", "share" : 10.72},
+        {"id" : 4, "name" : "Symbian", "share" : 2.49},
+        {"id" : 5, "name" : "Blackberry", "share" : 2.26},
+        {"id" : 6, "name" : "Windows Phone", "share" : 1.33}
+    ];
+    
 	$("#dataTable").jsonTable({
 		head : ['#','Operating System','Market Share'],
 		json : ['id', 'name', 'share']
 	});
-
+    
 	$("#dataTable").jsonTableUpdate({
-		source : "data.json",
+		source : json_source,
 		rowClass : "rowClass",
 		callback : function(){
 			$("#mssg").html("Table updated at " + new Date());
