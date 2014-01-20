@@ -3,16 +3,30 @@
     $.fn.jsonTable = function( options ) {
         var settings = $.extend({
             head: [],
-            json:[],
-            id: ""
-        }, options );
-        this.data("settings",settings);
-        $(this.selector + ' thead').empty();
-        var thead = $(this.selector + ' thead').append("<tr></tr>\n");
-        for(var i = 0; i < settings.head.length; i++){
-             $(this.selector + ' thead tr').append("<th>"+settings.head[i]+"</th>\n")
+            json:[]
+        }, options, { table: this } );
+        
+        table = this;
+        
+        table.data("settings",settings);
+        
+        if (table.find("thead").length == 0) {
+            table.append($("<thead></thead>").append("<tr></tr>"));
         }
-        return this;
+        
+        if (table.find("thead").find("tr").length == 0) {
+            table.find("thead").append("<tr></tr>");
+        }
+            
+        if (table.find("tbody").length == 0) {
+            table.append($("<tbody></tbody>"));
+        }
+        
+        $.each(settings.head, function(i, header) {
+            table.find("thead").find("tr").append("<th>"+header+"</th>");
+        });
+        
+        return table;
     };
 
     $.fn.jsonTableUpdate = function( options ){
@@ -22,34 +36,33 @@
             callback: undefined
         }, options );
         var settings = this.data("settings");
-        var sel = this.selector;
-        $(this.selector + ' tbody > tr').remove();
+
         if(typeof opt.source == "string")
         {
             $.get(opt.source, function(data) {
-                $.fn.updateFromObj(data,settings,sel, opt.rowClass, opt.callback);
+                $.fn.updateFromObj(data,settings,opt.rowClass, opt.callback);
             });
         }
         else if(typeof opt.source == "object")
         {
-            $.fn.updateFromObj(opt.source,settings,sel, opt.rowClass, opt.callback);
+            $.fn.updateFromObj(opt.source,settings, opt.rowClass, opt.callback);
         }
     }
 
-    $.fn.updateFromObj = function(obj,settings,selector, rowClass, callback){
-        $.each(obj, function(arrIndex,obj) {
-            var dataRow = this;
-            var tableRow = $("<tr></tr>").addClass(rowClass).attr({ "data-value": dataRow[settings.id] });
+    $.fn.updateFromObj = function(obj,settings,rowClass, callback){
+        settings.table.find("tbody").empty();
+        $.each(obj, function(i,line) {
+            var tableRow = $("<tr></tr>").addClass(rowClass);
             
-            $.each(settings.json, function() {
-                if(this == '*') {
-                    tableRow.append($("<td>"+(arrIndex+1)+"</td>"));
+            $.each(settings.json, function(j, identity) {
+                if(identity == '*') {
+                    tableRow.append($("<td>"+(i+1)+"</td>"));
                 }
                 else {
-                    tableRow.append($("<td>" + dataRow[this] + "</td>"));
+                    tableRow.append($("<td>" + line[this] + "</td>"));
                 }
             });
-            $(selector + '> tbody:last').append(tableRow);
+            settings.table.append(tableRow);
         });
         
         
@@ -57,7 +70,8 @@
             callback();
         }
         
-        $(window).trigger('resize'); // trigger the resize event to reposition dialog once all the data is loaded
+        $(window).trigger('resize');
     }
  
 }( jQuery ));
+ 

@@ -1,7 +1,7 @@
 {
     "name": "jsonTable",
     "title": "jsonTable",
-    "description": "jQuery plugin for dispaying JSON responses on a Table.",
+    "description": "jQuery plugin for displaying JSON responses on a Table.",
     "keywords": [
         "json",
         "table",
@@ -9,14 +9,14 @@
         "ajax",
         "get"
     ],
-    "version": "0.1.2",
+    "version": "0.1.5",
     "author": {
         "name": "Omkar Khair",
         "url" : "http://omkarslab.com"
     },
     "maintainers": [{
-        "name" : "Damien BUTY",
-        "url" : "https://github.com/Dam-Buty"
+        "name": "Damien Buty",
+        "url" : "http://www.dino.mx"
     }],
     "licenses": [
         {
@@ -25,7 +25,7 @@
         }
     ],
     "bugs": "https://github.com/omkarkhair/jsonTable/issues",
-    "homepage": "https://github.com/omkarkhair/jsonTable",
+    "homepage": "http://plugins.jquery.com/jsonTable/",
     "docs": "https://github.com/omkarkhair/jsonTable",
     "dependencies": {
         "jquery": ">=1.5"

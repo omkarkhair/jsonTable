@@ -1,46 +1,63 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>jQuery : jsonTable</title>
-	<script type="text/javascript" src="jquery.min.js"></script>
-	<script type="text/javascript" src="jsonTable.js"></script>
-	<style type="text/css">
-	.rowClass td
-	{
-		border: 1px solid #c1c1c1;
-	}
-	</style>
-</head>
-<body>
-<div id="mssg"></div>
-<table id="dataTable">
-	<thead>
-	</thead>
-	<tbody>
-	</tbody>
-</table>
-<script type="text/javascript">
-    var json_source = [
-        {"id" : 1, "name" : "iOS", "share" : 57.56},
-        {"id" : 2, "name" : "Android", "share" : 24.66},
-        {"id" : 3, "name" : "Java ME", "share" : 10.72},
-        {"id" : 4, "name" : "Symbian", "share" : 2.49},
-        {"id" : 5, "name" : "Blackberry", "share" : 2.26},
-        {"id" : 6, "name" : "Windows Phone", "share" : 1.33}
-    ];
-    
-	$("#dataTable").jsonTable({
-		head : ['#','Operating System','Market Share'],
-		json : ['id', 'name', 'share']
-	});
-    
-	$("#dataTable").jsonTableUpdate({
-		source : json_source,
-		rowClass : "rowClass",
-		callback : function(){
-			$("#mssg").html("Table updated at " + new Date());
-		}
-	});
-</script>
-</body>
+    <head>
+	    <title>jQuery : jsonTable</title>
+	    <style type="text/css">
+	        #dataTable.classy {
+	            color: red;
+	        }
+	    </style>
+    </head>
+
+    <body>
+        <table id="dataTable" style="color: red;">
+        </table>
+        
+        <br/>
+        
+        <div id="container"></div>
+        
+	    <script type="text/javascript" src="jquery.min.js"></script>
+	    <script type="text/javascript" src="jsonTable.js"></script>
+        <script type="text/javascript">
+            var json_source = [
+                {"model" : "Iphone 18", "name" : "iOS", "share" : 57.56},
+                {"model" : "Nexus 23", "name" : "Android", "share" : 24.66},
+                {"model" : "Tom-tom", "name" : "Java ME", "share" : 10.72},
+                {"model" : "Nokia 66610", "name" : "Symbian", "share" : 2.49},
+                {"model" : "Blackberry", "name" : "Blackberry", "share" : 2.26},
+                {"model" : "Lumia", "name" : "Windows Phone", "share" : 1.33}
+            ];
+            
+            var options = {
+                source: json_source,
+                rowClass: "classy",
+                callback: function(){
+                    alert("Table generated!");
+                }
+            };
+            
+            ///////////////////////////////
+            // Test on a pre-existing table
+	        $("#dataTable").jsonTable({
+		        head : ['Model','Operating System','Market Share'],
+		        json : ['model', 'name', 'share']
+	        });
+
+	        $("#dataTable").jsonTableUpdate(options);
+	        
+	        ///////////////////////////////
+	        // Test on a table not yet attached to the DOM
+	        var testTable = $("<table></table>");
+	
+	        testTable.jsonTable({
+	            head : ['N.', 'Model','Operating System','Market Share'],
+	            json : ['*', 'model', 'name', 'share'] // The '*' identity will be incremented at each line
+	        });
+	
+	        testTable.jsonTableUpdate(options);
+	
+	        $("#container").append(testTable);
+        </script>
+    </body>
 </html>

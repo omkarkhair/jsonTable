@@ -1,8 +1,8 @@
 [
-{"id" : 1, "name" : "iOS", "share" : 57.56},
-{"id" : 2, "name" : "Android", "share" : 24.66},
-{"id" : 3, "name" : "Java ME", "share" : 10.72},
-{"id" : 4, "name" : "Symbian", "share" : 2.49},
-{"id" : 5, "name" : "Blackberry", "share" : 2.26},
-{"id" : 6, "name" : "Windows Phone", "share" : 1.33}
+    {"model" : "Iphone 18", "name" : "iOS", "share" : 57.56},
+    {"model" : "Nexus 23", "name" : "Android", "share" : 24.66},
+    {"model" : "Tom-tom", "name" : "Java ME", "share" : 10.72},
+    {"model" : "Nokia 66610", "name" : "Symbian", "share" : 2.49},
+    {"model" : "Blackberry", "name" : "Blackberry", "share" : 2.26},
+    {"model" : "Lumia", "name" : "Windows Phone", "share" : 1.33}
 ]
